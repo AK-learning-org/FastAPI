@@ -1,0 +1,18 @@
+name: python CI/CD - Feature to Development
+
+on:
+  pull_request:
+    branches: [development]
+    types: [closed]
+  workflow_dispatch:
+
+jobs:
+  checkout-source-code:
+    name: Checkout Source Code
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    outputs:
+      should_run: ${{ steps.set_output.outputs.should_run }}
+    steps:
+      - id: set_output
+        run: echo "should_run=true" >> $GITHUB_OUTPUT
