@@ -1,18 +1,13 @@
-name: python CI/CD - Feature to Development
+name: Terraform Apply GKE-Cluster
 
 on:
   pull_request:
-    branches: [devlopment]
-    types: [closed]
-  workflow_dispatch:
+    branches:
+      - main
+    types:
+      - closed
 
 jobs:
-  checkout-source-code:
-    name: Checkout Source Code
+  terraform:
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main' && github.event.pull_request.head.ref == 'development'
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
-    outputs:
-      should_run: ${{ steps.set_output.outputs.should_run }}
-    steps:
-      - id: set_output
-        run: echo "should_run=true" >> $GITHUB_OUTPUT
