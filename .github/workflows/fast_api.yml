@@ -2,7 +2,7 @@ name: python CI/CD - Feature to Development
 
 on:
   pull_request:
-    branches: [development]
+    branches: [devlopment]
     types: [closed]
   workflow_dispatch:
 
